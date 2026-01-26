@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "es2017",
+      "es6",
+      "dom"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*",
+    "App.tsx",
+    "screens/**/*",
+    "services/**/*",
+    "types/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "backend"
+  ],
+  "extends": "expo/tsconfig.base"
+}
