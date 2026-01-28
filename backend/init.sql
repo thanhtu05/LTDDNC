@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Tạo index cho phone để tăng tốc độ truy vấn
 CREATE INDEX IF NOT EXISTS idx_users_phone ON users(phone);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
 
 -- Insert dữ liệu mẫu (optional)
 INSERT INTO users (phone, password, name, email, role) 
