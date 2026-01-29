@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ltdd_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: LTDD_nangcao_doan
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ltdd_network
+
+  # Backend API
+  backend:
+    build: .
+    container_name: ltdd_backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=123
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=LTDD_nangcao_doan
+      - JWT_SECRET=your_super_secret_key_change_me_in_production
+    depends_on:
+      - postgres
+    networks:
+      - ltdd_network
+    command: sh -c "sleep 5 && npm start"
+
+volumes:
+  postgres_data:
+
+networks:
+  ltdd_network:
+    driver: bridge
